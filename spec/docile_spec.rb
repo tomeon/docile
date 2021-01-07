@@ -578,6 +578,11 @@ describe Docile do
     it "returns the block's return value" do
       expect(result).to eq("Return me!")
     end
+
+    it "works with C-level procs" do
+      expect { Docile.dsl_eval_with_block_return("foo", &:upcase) }.not_to raise_error
+      expect { Docile.dsl_eval_with_block_return("foo", "bar", &:concat) }.not_to raise_error
+    end
   end
 
   describe ".dsl_eval_immutable" do
